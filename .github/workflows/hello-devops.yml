@@ -1,12 +1,21 @@
-name: My First Pipeline  # The name of our "Conveyor Belt"
+name: Python CI Test
 
-on: [push]              # TRIGGER: Run this every time I save (push) code
+on: [push]
 
-jobs:                   # THE WORK: What the belt actually does
-  say-hello:            # This is one "Job" or station on the belt
-    runs-on: ubuntu-latest  # Use a fresh, clean Linux computer from GitHub    
+jobs:
+  test-logic:
+    runs-on: ubuntu-latest
     steps:
-      - name: Greet the user
-        run: echo "Hello, you just triggered your first CI/CD pipeline!"
+      - name: Checkout code
+        uses: actions/checkout@v4  # This "downloads" your code onto the runner
 
-  
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pytest
+        run: pip install pytest    # Install the tool that runs the tests
+
+      - name: Run Tests
+        run: pytest test_calculator.py  # Run the actual test
