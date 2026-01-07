@@ -1,0 +1,12 @@
+name: My First Pipeline  # The name of our "Conveyor Belt"
+
+on: [push]              # TRIGGER: Run this every time I save (push) code
+
+jobs:                   # THE WORK: What the belt actually does
+  say-hello:            # This is one "Job" or station on the belt
+    runs-on: ubuntu-latest  # Use a fresh, clean Linux computer from GitHub    
+    steps:
+      - name: Greet the user
+        run: echo "Hello, you just triggered your first CI/CD pipeline!"
+
+  
